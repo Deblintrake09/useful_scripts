@@ -1,17 +1,17 @@
-!/bin/bash
+#!/bin/bash
 
-# get target folder and number of files as input arguments
-folder=$1
-num_files=$2
+# Variables for the number of files, target folder, group, and user
+num_files=10
+target_folder=/path/to/target/folder
+group=groupname
+user=username
 
-# create target folder if it doesn't exist
-if [ ! -d "$folder" ]; then
-  mkdir "$folder"
-fi
+# Create the target folder if it does not already exist
+mkdir -p $target_folder
 
-# create specified number of files in the target folder
-for ((i=1; i<=num_files; i++)); do
-  touch "$folder/file$i"
+# Create the specified number of files in the target folder
+for ((i=1; i<=$num_files; i++));
+do
+  touch "$target_folder/file$i"
+  chown $user:$group "$target_folder/file$i"
 done
-
-echo "Successfully created $num_files files in $folder."
